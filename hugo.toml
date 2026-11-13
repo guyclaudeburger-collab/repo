@@ -4,7 +4,7 @@ baseURL = 'http://localhost/'
 disableAliases = true
 defaultContentLanguage = 'fr'
 defaultContentLanguageInSubdir = false
-disableDefaultSiteRedirect = true
+disableDefaultSiteRedirect = false
 ignoreFiles = ['\.dj$']
 
 [security]
@@ -121,14 +121,25 @@ layout = "glossary-item"
 [cascade.target]
 path = "/*/glossaire/*"
 
+# [[cascade]]
+#   [cascade.sites.complements]
+#     languages = ['en']
+#   [cascade.target.sites.matrix]
+#     languages = ['de']
+#
+# [[cascade]]
+#   [cascade.sites.complements]
+#     languages = ['fr']
+#   [cascade.target.sites.matrix]
+#     languages = ['en']
 [[cascade]]
   [cascade.sites.complements]
-    languages = ['en']
-  [cascade.target.sites.matrix]
     languages = ['de']
+  [cascade.target.sites.matrix]
+    languages = ['en']
 
 [[cascade]]
   [cascade.sites.complements]
-    languages = ['fr']
-  [cascade.target.sites.matrix]
     languages = ['en']
+  [cascade.target.sites.matrix]
+    languages = ['fr']
