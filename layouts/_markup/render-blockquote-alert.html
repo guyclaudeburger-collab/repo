@@ -1,0 +1,35 @@
+{{- $calloutLabels := dict
+  "note"      "📔 Note"
+  "tip"       "💡 Astuce"
+  "important" "❗ Important"
+  "warning"   "⚠️ Attention"
+  "caution"   "🚨 Danger"
+-}}
+{{- if eq .AlertType "header" }}
+<header class="alert">
+  {{- with .AlertTitle }}<p class="alert-title"><strong>{{ . }}</strong></p>{{ end }}
+  {{ .Text }}
+</header>
+{{- else if eq .AlertType "figure" }}
+<figure{{ with .Attributes.class }} class="{{ . }}"{{ end }}>
+  {{ .Text }}
+  {{- with .AlertTitle }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>
+{{- else if and (eq .AlertType "note") (not hugo.IsServer) }}
+{{- /* note: only displayed in server mode */ -}}
+{{- else if isset $calloutLabels .AlertType }}
+{{- $label := index $calloutLabels .AlertType }}
+{{- if eq .AlertSign "-" }}
+<details class="alert {{ .AlertType }}" role="note" aria-label="{{ $label }}">
+  <summary>{{ $label }}</summary>
+  {{ .Text }}
+</details>
+{{- else }}
+<aside class="alert {{ .AlertType }}" role="note" aria-label="{{ $label }}">
+  <p><strong>{{ $label }}</strong></p>
+  <div>{{ .Text }}</div>
+</aside>
+{{- end }}
+{{- else }}
+{{- errorf "Wrong callout type: %s %s" .Page.Path .AlertType }}
+{{- end -}}

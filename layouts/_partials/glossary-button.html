@@ -1,0 +1,15 @@
+{{- $id := .target.File.TranslationBaseName -}}
+{{- $label := .text | default .target.LinkTitle -}}
+<button
+  popovertarget="{{ $id }}"
+  popovertargetaction="toggle"
+  hx-get="{{ .target.RelPermalink }}"
+  hx-trigger="click once"
+  hx-select="main section"
+  hx-swap="afterend"
+  hx-target="#{{ $id }} header">
+  <span>{{ $label }}</span>  
+</button>
+{{- if not (in (page.Store.Get "glossaryPopovers") $id) -}}
+  {{- page.Store.Add "glossaryPopovers" $id -}}
+{{- end -}}

@@ -1,0 +1,30 @@
+<ul>
+{{- $currentpage := .currentpage -}}
+{{- range .pages -}}
+<li>
+{{- if .IsSection -}}
+{{- if .File -}}
+<details>
+  <summary>
+    <a href="{{ .RelPermalink }}" {{ if eq . $currentpage }}aria-current="page"{{ end }}>{{ .LinkTitle }}</a>
+  </summary>
+  {{ partial "folding-menu" (dict
+      "pages" .Pages
+      "currentpage" $currentpage
+  ) }}
+</details>
+{{- else -}}
+{{ partial "folding-menu" (dict
+    "pages" .Pages
+    "currentpage" $currentpage
+) }}
+{{- end -}}
+{{- else -}}
+<a href="{{ .RelPermalink }}"
+ {{ if eq . $currentpage }}aria-current="page"{{ end }}>
+{{ .LinkTitle }}
+</a>
+{{- end -}}
+</li>
+{{- end -}}
+</ul>

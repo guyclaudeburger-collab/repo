@@ -1,0 +1,25 @@
+{{- if or (strings.Contains .Destination "://") (strings.Contains .Destination "mailto:") -}}
+<a href="{{ .Destination }}">{{ .Text }}</a>
+{{ return }}
+{{- else if eq .Destination "ADD_REF" -}}
+  {{- warnf "Missing reference for link [%s](%s) in page %s" (.Text | htmlUnescape) .Destination .Page.Path -}}
+  {{- .Text -}}
+{{ return }}
+{{- else if eq .Destination "Q" -}}
+  <q{{ with .Title }} cite="{{ . }}"{{ end }}>{{ .Text }}</q>
+{{ return }}
+{{- else if in (slice "ABBR" "DFN" "VAR" "CITE" "SMALL" "B" "I") .Destination -}}
+  {{- if .Title -}}
+    {{- printf `<%s title="%s">%s</%s>` .Destination .Title .Text .Destination | safeHTML -}}
+  {{- else -}}
+    {{- printf "<%s>%s</%s>" .Destination .Text .Destination | safeHTML -}}
+  {{- end -}}
+  {{ return }}
+{{- end -}}
+{{- $page := site.GetPage (urls.Parse .Destination).Path -}}
+{{- if and (ne .Page.Layout "glossary-item") (eq $page.Layout "glossary-item") -}}
+<!-- that was to avoid making popup buttons inside a popup, though I'll correct the hyperscript script at some point to replace the current popup instead -->
+  {{- partial "glossary-button" (dict "target" $page "text" .Text) -}}
+{{- else  -}}
+  <a {{ if ne .Page.Layout "glossary-item" }}target="_blank"{{end}} href="{{ $page.Permalink }}">{{ .Text }}</a>
+{{- end -}}

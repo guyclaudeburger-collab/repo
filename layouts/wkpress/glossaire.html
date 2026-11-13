@@ -1,0 +1,6 @@
+{{ define "content"}}
+<h1>{{ i18n "glossary" .}}</h1>
+{{ range .Pages }}
+<p><strong>{{.LinkTitle }}</strong>: <a href={{.RelPermalink}} class="read-more" style="display:inline-flex" href="{{.RelPermalink}}">{{i18n "read-more"}}</a></p>{{end}}
+{{end}}
+{{ define "sidebar" }}{{ end }}
