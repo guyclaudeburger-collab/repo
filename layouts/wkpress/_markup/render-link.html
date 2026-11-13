@@ -21,5 +21,5 @@
 <!-- that was to avoid making popup buttons inside a popup, though I'll correct the hyperscript script at some point to replace the current popup instead -->
   {{- partial "glossary-button" (dict "target" $page "text" .Text) -}}
 {{- else  -}}
-  <a {{ if ne .Page.Layout "glossary-item" }}target="_blank"{{end}} href="{{ $page.Permalink }}">{{ .Text }}</a>
+  <a {{ if ne .Page.Layout "glossary-item" }}target="_blank"{{end}} href="{{ $page.RelPermalink }}">{{ .Text }}</a>
 {{- end -}}
