@@ -1,0 +1,24 @@
+{{- range hugo.Sites -}}
+  {{- range $p := .Pages -}}
+    {{- $target := $p.RelPermalink -}}
+    {{- with $p.Params.redirect -}}
+      {{- $r := . -}}
+      {{- if (urls.Parse $r).IsAbs -}}
+        {{- $target = $r -}}
+      {{- else -}}
+        {{- $t := $p.GetPage $r -}}
+        {{- if not $t -}}
+          {{- errorf "redirect %q not found (from %q)" $r $p.String -}}
+        {{- end -}}
+        {{- $target = $t.RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+    {{- range $p.Aliases -}}
+      {{- if findRE `\s` . -}}
+        {{- errorf "alias in %q contains whitespace" $p.String -}}
+      {{- end -}}
+      {{- $a := strings.TrimSuffix "/" . -}}
+      {{- printf "%s \"%s\";\n%s/ \"%s\";\n" $a $target $a $target -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

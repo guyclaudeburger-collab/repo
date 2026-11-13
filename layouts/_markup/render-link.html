@@ -1,0 +1,27 @@
+{{- $destination := .Destination -}}
+{{- if eq $destination "ADD_REF" -}}
+  {{- warnf "Missing reference for link [%s](%s) in page %s" (.Text | htmlUnescape) $destination .Page.Path -}}{{- .Text -}}
+{{- else if in (slice "Q" "ABBR" "DFN") .Destination }}
+{{- (printf "<%s%s>%s</%s>" (.Destination | lower) (cond .Title (printf " cite=%q" .Title) "") .Text (.Destination | lower)) | safeHTML }}
+{{- else if in (slice "B" "I" "SMALL" "VAR" "CITE") .Destination }}
+{{- (printf "<%s>%s</%s>" (.Destination | lower) .Text (.Destination | lower)) | safeHTML }}
+{{- else if eq .Destination "ref" }}
+{{ index hugo.Data.bibliography (string .Text) | safeHTML }}
+{{- else }}
+  {{- $isRemote := strings.Contains $destination "://" -}}
+  {{- if $isRemote -}}
+    {{- with .Page.Store.Get "heading" -}}
+      {{- $m := dict "headingID" .id "headingPlainText" .plainText "headingText" .text "linkDestination" $.Destination "linkText" $.Text "linkTitle" $.Title -}}
+      {{- $.Page.Store.Add "links" $m -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $url := urls.Parse .Destination -}}
+    {{ $page := site.GetPage $url.Path }}
+    {{- with $page -}}
+		{{- $destination = print .RelPermalink $url.Fragment -}}
+	{{- else with (resources.Get .Destination) -}}
+		{{- $destination = .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+  <a href="{{- $destination -}}" {{- if $isRemote -}}rel="external nofollow" target="_blank" {{- with .Title -}}aria-label="{{- . -}}" data-pagefind-index-attrs="aria-label"{{- end -}}{{- end -}}>{{- .Text -}}</a>
+{{- end -}}

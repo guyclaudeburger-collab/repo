@@ -1,0 +1,102 @@
+{{ $.Page.Store.Set "glossaryPopovers" (slice) -}}
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Locale }}" class="{{ .FirstSection.Slug}}"><head>
+{{- block "head" . -}}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>{{ .FirstSection.LinkTitle }} - {{ .LinkTitle | .RenderString | plainify }}</title>
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="{{ .Permalink }}" />
+<meta property="og:locale" content="{{ .Site.Language.Locale }}" />
+{{ range .Translations }}
+<meta property="og:locale:alternate" content="{{ .Site.Language.Locale }}" />
+{{ end }}
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ .FirstSection.LinkTitle }} - {{ .LinkTitle }}" />
+<meta property="og:description" content="{{ default .Site.Params.Description .FirstSection.Params.Description }}" />
+<meta property="og:url" content="{{ .RelPermalink }}" />
+<meta property="og:site_name" content="{{ .FirstSection.LinkTitle }}" />
+<meta property="article:modified_time" content="{{ .Lastmod.Format "Monday, 02/01/2006" }}" />
+<link rel="preload" href="/htmx.min.js" as="script">
+<meta name="twitter:card" content="summary" />
+<script src='{{ relURL "htmx.min.js" }}'></script>
+<link rel='stylesheet' href='{{ relURL "default.css" }}' type='text/css' />
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<meta charset="utf-8">
+{{ end }}
+{{ with .FirstSection.Params.hero }}
+<link rel="preload" {{ with resources.Get .}}href="{{ .Permalink }}" as="{{.MediaType.MainType}}" type="{{.MediaType.Type}}"{{ end }}>
+{{ end }}
+</head>
+<body {{if eq .FirstSection .}}class="home"{{ end }}>
+<header id="header"><div class="wrapper">
+  <a href="{{ .FirstSection.RelPermalink }}" id="logo"></a>
+{{ block "slogan" . }}<div class="slogan">{{ i18n "subtitle" }}</div>{{ end }}
+</div></header>
+<div id="header-mobile">
+    <input type="checkbox" class="toggle-mobile-nav" id="display-header">
+  <a href='{{ .FirstSection.RelPermalink }}' id='logo-mobile'></a>
+</div>
+<nav id="main-nav">
+<menu id="menu-principal" class="wrapper menu">
+{{ with .FirstSection }}<li><a href="{{ .RelPermalink }}"
+{{ if eq .RelPermalink $.RelPermalink }}aria-current="page"{{ end }}>
+{{ i18n "welcome" }}</a></li>{{ end }}
+{{- range .FirstSection.RegularPages -}}
+<li><a href="{{ .RelPermalink }}"
+{{ if eq .RelPermalink $.RelPermalink }}aria-current="page"{{ end }}>
+{{ .LinkTitle }}</a></li>
+{{ end }}
+<li><details name="header-menu"><summary>{{ i18n "sites-internets"}}</summary>
+<ul id=sites>{{ range .Site.Sections }}
+<li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+{{ end }}<ul/>
+</details></li>
+<li id=langs>{{ range .AllTranslations }}
+<a href="{{ .RelPermalink }}" {{ with .Site.Language.Locale }}hreflang="{{.}}" lang="{{.}}"{{ end }}><img src="{{ safeURL .Site.Language.Params.flag }}"/></a>
+{{ end }}</li>
+</menu>
+</nav>
+{{ with .FirstSection.Params.hero }}
+<div id="bg-featured">
+<video autoplay loop muted playsinline>
+<source {{ with resources.Get . }}src="{{ .Permalink }}" type="{{.MediaType.Type}}"{{ end }} />
+</video>
+  </div>
+{{ end }}
+<div id="content" class=wrapper>
+<main data-pagefind-body>
+{{- block "content" . -}}
+<h1>{{ .RenderString .Title }}</h1>
+{{- block "sidebar" . -}}
+<aside>
+<div><p>{{ i18n "last-entries-glossaire" }}:</p>
+<ul>
+{{- range first 5 (.FirstSection.GetPage "glossaire").Pages.ByLastmod.Reverse -}}
+<li>{{ partial "glossary-button.html" (dict "target" .) }}</li>
+{{- end -}}
+</ul></div><div><p>{{ i18n "extend_your_knowledge" }}:</p><ul>
+{{- range first 5 (shuffle (after 5 (.FirstSection.GetPage "glossaire").Pages)) -}}
+<li>{{ partial "glossary-button.html" (dict "target" .) }}</li>
+{{- end -}}
+</ul>{{- block "sidebar-extra" . }}{{ end -}}
+</div></aside>{{ end }}<section>
+{{- if eq (path.BaseName .FirstSection.Path) "psychototale" -}}
+{{- $label := printf "⚠️ %s" (i18n "warning") -}}
+<details class="alert warning" role="note" aria-label="{{ $label }}"{{ if .Params.show_warning }} open{{ end }}>
+<summary>{{ $label }}</summary>
+{{- i18n "warning-message"  -}}
+</details>
+{{- end }}{{ .Content -}}
+</section>
+{{- end -}}
+</main>
+{{- block "content-extra" . }}{{ end -}}
+ </div><footer>{{ block "footer" . }}
+{{- range .Page.Store.Get "glossaryPopovers" -}}<article id="{{ . }}" popover="auto"><header><h1>{{ (site.GetPage .).LinkTitle }}</h1><button tabindex="0" popovertarget="{{ . }}" popovertargetaction="toggle">❌</button></header>
+<footer></footer></article>
+{{- end -}}
+{{ block "footer-extra" . }}{{ end -}}
+{{ end }}<span>{{ .FirstSection.LinkTitle }}</span>{{ with .FirstSection.GetPage "glossaire" }}<a href="{{.RelPermalink}}" class="read-more">{{ i18n "glossary" }}</a>{{ end  -}}
+<time>{{ time.Now.Year }}</time></footer>
+{{- block "body-end" . }}{{ end -}}
+</body></html>

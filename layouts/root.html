@@ -1,0 +1,7 @@
+{{- define "pages" -}}
+<details name="header-menu"><summary>Pages</summary>
+{{ partial "folding-menu" (dict
+    "pages" .FirstSection.RegularPages
+    "currentpage" .Page
+) }}</details>
+{{- end -}}

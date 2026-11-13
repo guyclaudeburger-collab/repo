@@ -1,0 +1,53 @@
+{{- $currentpage := . -}}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ .Site.Language.Name }}" lang="{{ .Site.Language.Locale }}" class={{ .FirstSection.Slug }}>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="{{ relURL "default.css" }}">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>{{ .Title }} ┆ {{ site.Title }}</title>
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:title" content="{{ .Title }}"/>
+{{- with .Description -}}
+<meta name="description" content="{{ . }}">
+<meta property="og:description" content="{{.}}"/>
+{{- end -}}
+<meta property="og:type" content="{{ if .IsHome }}website{{ else }}main{{ end }}"/>
+<meta property="og:url" content="{{ .RelPermalink }}"/>
+{{- if .IsPage -}}
+<meta property="main:modified_time" content="{{.Lastmod.Format  "Monday, 02/01/2006"}}" />
+{{ end }}
+</head>
+<body data-pagefind-body="data-pagefind-body">
+<nav>{{ with .FirstSection }}<a href="{{- .RelPermalink -}}" {{if eq . $currentpage}}aria-current="page"{{end}} class=home>{{- .Title  -}}</a>{{- end -}}
+{{- $currentpage := .Page -}}
+{{- if .Page.Params.Toc -}}
+<details role=directory name="header-menu"><summary>☰</summary>
+{{- .TableOfContents -}}
+</details>
+{{- end -}}
+{{- block "pages" . -}}
+<details name="header-menu"><summary>Pages</summary>
+{{ partial "folding-menu" (dict
+    "pages" .FirstSection.Pages
+    "currentpage" .Page
+) }}</details>
+{{- end -}}
+<details name="header-menu"><summary>{{ i18n "sites-internets"}}</summary>
+<ul>{{ range .Site.Sections }}
+<li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+{{ end }}</ul>
+</details>
+<div id=langs>{{ range .AllTranslations }}
+<a href="{{ .RelPermalink }}" {{ with .Site.Language.Locale }}hreflang="{{.}}" lang="{{.}}"{{ end }}><img src="{{ safeURL .Site.Language.Params.flag }}"/></a>
+{{ end }}</div></li>
+</ul>
+</nav>
+<main autofocus>
+{{ block "main-content" . }}
+<h1>{{ .RenderString .Page.Params.Title }}</h1>
+{{ end }}
+{{- .Content }}
+</main>
+</body>
+</html>

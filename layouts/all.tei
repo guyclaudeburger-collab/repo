@@ -1,0 +1,294 @@
+<?xml-model href="https://tei-c.org/release/xml/tei/custom/schema/relaxng/tei_math.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-stylesheet type="text/css" href="{{ .Params.css }}" ?>
+{{- $tr := .Params.translation }}
+{{- $src := false }}
+{{- with .Params.translation_of }}{{ $src = $.GetPage . }}{{ end }}
+{{- $srcLang := "" }}
+{{- with $tr }}{{ $srcLang = .source_lang }}{{ end }}
+{{- if and (not $srcLang) $src }}{{ $srcLang = $src.Language.Name }}{{ end }}
+{{- $trlId := "" }}
+{{- range .Params.resp }}
+  {{- $roles := index . 1 }}
+  {{- $roles = cond (reflect.IsSlice $roles) $roles (slice $roles) }}
+  {{- if in $roles "trl" }}{{ $trlId = index . 0 }}{{ end }}
+{{- end }}
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="{{ .Language.Name }}">
+<teiHeader>
+  <fileDesc>
+    <titleStmt>
+      <title type="main">{{ .Params.title }}</title>
+      {{- with .Params.subtitle }}<title type="sub">{{ . }}</title>{{ end }}
+      {{- range .Params.resp }}
+      {{- $id := index . 0 }}
+      {{- $r := index hugo.Data.teidata.persons $id }}
+      {{- $roles := index . 1 }}
+      {{- $roles = cond (reflect.IsSlice $roles) $roles (slice $roles) }}
+      <respStmt>
+        {{- range $roles }}
+        <resp key="{{ . }}">{{ index hugo.Data.teidata.relatorLabels . }}</resp>
+        {{- end }}
+        <name xml:id="{{ $id }}">{{ $r.name }}{{ range $key, $value := $r.refs }}<idno type="{{ $key }}">{{ $value }}</idno>{{ end }}</name>
+      </respStmt>
+      {{- end }}
+    </titleStmt>
+<publicationStmt>
+  {{- with .Params.publication }}
+  <authority>
+    {{- $authId := $trlId }}
+    {{- if and (not $authId) $.Params.resp }}{{ $authId = index (index $.Params.resp 0) 0 }}{{ end }}
+    {{- with $authId }}{{ (index hugo.Data.teidata.persons .).name }}{{ end -}}
+  </authority>
+  <availability status="{{ .availability | default "unknown" }}">
+    <p>{{ with .status }}{{ title . }}. {{ end }}Availability: {{ .availability | default "unknown" }}.</p>
+    {{- with .licence }}
+    <licence{{ with $.Params.publication.licence_url }} target="{{ . }}"{{ end }}>{{ . }}</licence>
+    {{- end }}
+  </availability>
+  {{- else with $src }}
+  <p>See <ref target="{{ $src.Permalink }}">source edition</ref>.</p>
+  {{- else }}
+  <p>Unpublished.</p>
+  {{- end }}
+</publicationStmt>
+    {{- with $tr }}{{ with .notes }}
+    <notesStmt>
+      <note type="translation"{{ with $trlId }} resp="#{{ . }}"{{ end }}>{{ . }}</note>
+    </notesStmt>
+    {{- end }}{{ end }}
+    {{- if $src }}
+    <sourceDesc>
+      <bibl type="translationSource">
+        {{- range $src.Params.resp }}
+        {{- $roles := index . 1 }}
+        {{- $roles = cond (reflect.IsSlice $roles) $roles (slice $roles) }}
+        {{- if in $roles "aut" }}
+        {{- $a := index hugo.Data.teidata.persons (index . 0) }}
+        <author key="{{ index . 0 }}">{{ $a.name }}</author>
+        {{- end }}
+        {{- end }}
+        <title level="m" type="main" xml:lang="{{ $srcLang }}">{{ $src.Params.title }}</title>
+        {{- with $src.Params.subtitle }}<title level="m" type="sub" xml:lang="{{ $srcLang }}">{{ . }}</title>{{ end }}
+        {{- with $src.Params.source }}
+        {{- with .publisher }}<publisher>{{ . }}</publisher>{{ end }}
+        {{- with .pub_place }}<pubPlace>{{ . }}</pubPlace>{{ end }}
+        {{- with .date }}<date when="{{ . }}">{{ . }}</date>{{ end }}
+        {{- range $key, $value := .idno }}<idno type="{{ $key }}">{{ $value }}</idno>{{ end }}
+        {{- end }}
+        <ptr type="digitalEdition" target="{{ $src.Permalink }}"/>
+      </bibl>
+    {{- else }}
+    <sourceDesc>
+      {{- with .Params.source }}
+      <biblFull>
+        <titleStmt>
+          <title type="main">{{ $.Params.title }}</title>
+          {{- with $.Params.subtitle }}<title type="sub">{{ . }}</title>{{ end }}
+          {{- range $.Params.resp }}
+          {{- $id := index . 0 }}
+          {{- $r := index hugo.Data.teidata.persons $id }}
+          {{- $roles := index . 1 }}
+          {{- $roles = cond (reflect.IsSlice $roles) $roles (slice $roles) }}
+          {{- if $roles }}
+          <respStmt>
+            {{- range $roles }}
+            <resp key="{{ . }}">{{ index hugo.Data.teidata.relatorLabels . }}</resp>
+            {{- end }}
+            <name key="{{ $id }}">{{ $r.name }}{{ range $key, $value := $r.refs }}<idno type="{{ $key }}">{{ $value }}</idno>{{ end }}</name>
+          </respStmt>
+          {{- end }}
+          {{- end }}
+          {{- with .printer }}
+          <respStmt>
+            <resp key="prt">{{ index hugo.Data.teidata.relatorLabels "prt" }}</resp>
+            <orgName>{{ .name }}
+              <address>
+                {{- with .street }}<street>{{ . }}</street>{{ end }}
+                {{- with .postcode }}<postCode>{{ . }}</postCode>{{ end }}
+                {{- with .settlement }}<settlement>{{ . }}</settlement>{{ end }}
+              </address>
+            </orgName>
+          </respStmt>
+          {{- end }}
+        </titleStmt>
+        {{- with .extent }}{{ with .pages }}
+        <extent><measure unit="page" quantity="{{ . }}">{{ . }} p.</measure></extent>
+        {{- end }}{{ end }}
+        <publicationStmt>
+          {{- with .publisher }}<publisher>{{ . }}</publisher>{{ end }}
+          {{- with .pub_place }}<pubPlace>{{ . }}</pubPlace>{{ end }}
+          {{- with .date }}<date when="{{ . }}">{{ . }}</date>{{ end }}
+          {{- range $key, $value := .idno }}<idno type="{{ $key }}">{{ $value }}</idno>{{ end }}
+        </publicationStmt>
+        {{- if or .legal_deposit .colophon }}
+        <notesStmt>
+          {{- with .legal_deposit }}
+          <note type="legalDeposit"><date type="legalDeposit" when="{{ .date }}">{{ .date }}</date> <idno type="legalDeposit">{{ .number }}</idno></note>
+          {{- end }}
+          {{- with .colophon }}<note type="colophon">{{ . }}</note>{{ end }}
+        </notesStmt>
+        {{- end }}
+      </biblFull>
+      {{- $hasMsDesc := false }}
+      {{- with .copy }}{{ if or .repository .shelfmark }}{{ $hasMsDesc = true }}{{ end }}{{ end }}
+      {{- if $hasMsDesc }}
+      <msDesc>
+        <msIdentifier>
+          {{- with .copy }}
+          {{- with .repository }}<repository>{{ . }}</repository>{{ end }}
+          {{- with .shelfmark }}<idno type="shelfmark">{{ . }}</idno>{{ end }}
+          {{- end }}
+        </msIdentifier>
+        <physDesc>
+          {{- if or .extent .dimensions .layout }}
+          <objectDesc form="codex">
+            {{- if or .extent .dimensions }}
+            <supportDesc material="paper">
+              <extent>
+                {{- with .extent }}
+                {{- with .pages }}<measure unit="page" quantity="{{ . }}"/>{{ end }}
+                {{- with .weight_g }}<measure type="weight" unit="g" quantity="{{ . }}">{{ . }} g</measure>{{ end }}
+                {{- end }}
+                {{- with .dimensions }}
+                <dimensions type="binding" unit="{{ default "mm" .unit }}">
+                  {{- with .height }}<height quantity="{{ . }}">{{ . }}</height>{{ end }}
+                  {{- with .width }}<width quantity="{{ . }}">{{ . }}</width>{{ end }}
+                  {{- with .depth }}<depth quantity="{{ . }}">{{ . }}</depth>{{ end }}
+                </dimensions>
+                {{- end }}
+              </extent>
+            </supportDesc>
+            {{- end }}
+            {{- with .layout }}
+            <layoutDesc>
+              <layout>
+                {{- with .note }}<p>{{ . }}</p>{{ end }}
+                {{- with .measures }}
+                <p>{{- range $i, $m := . }}{{ if $i }} ; {{ end }}<measure type="{{ $m.type }}" unit="{{ $m.unit }}" quantity="{{ $m.value }}">{{ default $m.type $m.label }} : {{ $m.value }} {{ $m.unit }}</measure>{{ end -}}</p>
+                {{- end }}
+              </layout>
+            </layoutDesc>
+            {{- end }}
+          </objectDesc>
+          {{- end }}
+          {{- with .binding }}<bindingDesc><binding><p>{{ . }}</p></binding></bindingDesc>{{ end }}
+        </physDesc>
+      </msDesc>
+      {{- end }}
+      {{- else }}
+      <bibl>Born-digital text; no external source.</bibl>
+      {{- end }}
+    </sourceDesc>
+    {{- end }}
+  </fileDesc>
+  {{- $rend := "" }}
+  {{- with .Params.source }}{{ with .layout }}{{ $rend = .css }}{{ end }}{{ end }}
+  {{- if or .Params.editorial $rend $src }}
+  <encodingDesc>
+    {{- with $rend }}
+    <tagsDecl>
+      <rendition xml:id="source-body" scheme="css">{{ . }}</rendition>
+    </tagsDecl>
+    {{- end }}
+    {{- with .Params.editorial }}
+    <editorialDecl>
+      {{- with .segmentation }}
+      <segmentation><p>{{ . }}</p></segmentation>
+      {{- end }}
+      {{- with .quotation }}
+      <quotation marks="{{ .marks }}"><p>{{ .comment }}</p></quotation>
+      {{- end }}
+    </editorialDecl>
+    {{- end }}
+    {{- if $src }}{{ with $tr }}{{ with .alignment }}
+    {{- $idp := (index (dict "line" "l" "paragraph" "p" "page" "pb") .) | default "l" }}
+    <listPrefixDef>
+      <prefixDef ident="src" matchPattern="(\d+)" replacementPattern="{{ $src.Permalink }}#{{ $idp }}$1">
+        <p>Pointers of the form src:N resolve to the {{ . }}-level unit with xml:id "{{ $idp }}N" in the source-text edition.</p>
+      </prefixDef>
+    </listPrefixDef>
+    {{- end }}{{ end }}{{ end }}
+  </encodingDesc>
+  {{- end }}
+  <profileDesc>
+    {{- with .Params.summary }}<abstract><p>{{ . }}</p></abstract>{{ end }}
+    <langUsage>
+      <language ident="{{ .Language.Name }}">{{ .Language.Label | default .Language.Name }}</language>
+    </langUsage>
+    {{- with .Params.creation }}
+    <creation>
+      {{- with .date }}
+      {{- $lbl := .label }}
+      {{- if not $lbl }}{{ if .when }}{{ $lbl = .when }}{{ else if and .from .to }}{{ $lbl = printf "%v–%v" .from .to }}{{ end }}{{ end }}
+      <date{{ with .when }} when="{{ . }}"{{ end }}{{ with .not_before }} notBefore="{{ . }}"{{ end }}{{ with .not_after }} notAfter="{{ . }}"{{ end }}{{ with .from }} from="{{ . }}"{{ end }}{{ with .to }} to="{{ . }}"{{ end }}>{{ $lbl }}</date>
+      {{- end }}
+      {{- range .place }}
+      {{- $pl := index hugo.Data.teidata.places . }}
+      <placeName key="{{ . }}">{{ $pl.name }}</placeName>
+      {{- end }}
+      {{- with .circumstances }} {{ . }}{{ end }}
+    </creation>
+    {{- else }}
+    {{- with $tr }}{{ if or .started .completed }}
+    <creation>
+      <date{{ with .started }} from="{{ . }}"{{ end }}{{ with .completed }} to="{{ . }}"{{ end }}>{{ with .started }}{{ . }}{{ end }}{{ if and .started .completed }}–{{ end }}{{ with .completed }}{{ . }}{{ end }}</date>
+      Translation.
+    </creation>
+    {{- end }}{{ end }}
+    {{- end }}
+    {{- with .Params.factuality }}
+    <textClass>
+      <classCode scheme="local:factuality">{{ . }}</classCode>
+    </textClass>
+    {{- end }}
+    {{- if or .Params.persons .Params.events }}
+    <particDesc>
+      {{- with .Params.persons }}
+      <listPerson>
+        {{- range . }}
+        {{- $p := index hugo.Data.teidata.persons . }}
+        <person xml:id="{{ . }}"{{ with $p.sex }} sex="{{ . }}"{{ end }}{{ with $p.role }} role="{{ . }}"{{ end }}>
+          <persName>{{ $p.name }}</persName>
+          {{- range $key, $value := $p.refs }}<idno type="{{ $key }}">{{ $value }}</idno>{{ end }}
+          {{- with $p.desc }}<note>{{ . }}</note>{{ end }}
+        </person>
+        {{- end }}
+      </listPerson>
+      {{- end }}
+      {{- with .Params.events }}
+      <listEvent>
+        {{- range . }}
+        {{- $e := index hugo.Data.teidata.events . }}
+        <event xml:id="{{ . }}"{{ with $e.type }} type="{{ . }}"{{ end }}>
+          {{- range $key, $value := $e.refs }}<idno type="{{ $key }}">{{ $value }}</idno>{{ end }}
+          <label>{{ $e.name }}</label>
+          {{- with $e.desc }}<note>{{ . }}</note>{{ end }}
+        </event>
+        {{- end }}
+      </listEvent>
+      {{- end }}
+    </particDesc>
+    {{- end }}
+    {{- with .Params.places }}
+    <settingDesc>
+      <listPlace>
+        {{- range . }}
+        {{- $pl := index hugo.Data.teidata.places . }}
+        <place xml:id="{{ . }}">
+          <placeName>{{ $pl.name }}</placeName>
+          {{- range $key, $value := $pl.refs }}<idno type="{{ $key }}">{{ $value }}</idno>{{ end }}
+        </place>
+        {{- end }}
+      </listPlace>
+    </settingDesc>
+    {{- end }}
+  </profileDesc>
+  {{- with $tr }}{{ with .status }}
+  <revisionDesc status="{{ index (dict "draft" "draft" "complete" "approved" "unfinished" "unfinished") . | default . }}">
+    <change{{ if not $.Lastmod.IsZero }} when="{{ $.Lastmod.Format "2006-01-02" }}"{{ end }}{{ with $trlId }} who="#{{ . }}"{{ end }}>Translation status: {{ . }}.</change>
+  </revisionDesc>
+  {{- end }}{{ end }}
+</teiHeader>
+<text {{ with .Params.rend }}rend="{{.}}"{{ end }}>
+{{- .RawContent -}}
+</text>
+</TEI>
