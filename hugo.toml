@@ -1,6 +1,6 @@
 title = 'Minibiographie'
 disableKinds = ['taxonomy']
-baseURL = 'http://localhost/'
+baseURL = '/'
 disableAliases = true
 defaultContentLanguage = 'fr'
 defaultContentLanguageInSubdir = false

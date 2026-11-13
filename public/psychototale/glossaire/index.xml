@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Minibiographie</title>
+		<link>/psychototale/glossaire/</link>
+		<description>Recent content on Minibiographie</description>
+		<generator>Hugo</generator>
+		<language>fr-FR</language>
+		
+		
+		
+		
+			<atom:link href="/psychototale/glossaire/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Sexualité humaine</title>
+				<link>/psychototale/sexualit%C3%A9_humaine/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>/psychototale/sexualit%C3%A9_humaine/</guid>
+				<description>&lt;p&gt;Du point de vue de l’écologie, c’est le rapport de la sexualité à l’environnement sous toutes ses formes. Il faut prendre en compte la qualité de l’entourage, les affinités ressenties pour tel ou tel individu (ou affinités &lt;q&gt;&lt;a  href=&#34;/meta/pourquoi-parler/&#34;&gt;énergétiques&lt;/a&gt;&lt;/q&gt;), le comportement du partenaire, l’image de la sexualité renvoyée par la culture et la morale, l’acceptation ou le refus de l’existence d’une dimension transcendante, mais aussi les &lt;a  href=&#34;/instincto/&#34;&gt;données de l’alimentation&lt;/a&gt; et leurs répercussions tant physiologiques que psychologiques.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Une base empirique vérifiable</title>
+				<link>/psychototale/base-empirique-verifiable/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>/psychototale/base-empirique-verifiable/</guid>
+				<description>&lt;p&gt;Il peut paraître étrange de considérer une série de &lt;a  href=&#34;&#34;&gt;phénomènes paranormaux&lt;/a&gt; comme une base empirique valable, pour quelque théorie que ce soit. Pourtant, la découverte du rapport fondamental entre Eros et développement des facultés extrasensorielles apporte un double fondement factuel à l’édifice psychanalytique, avec toutes les conséquences que cela peut avoir sur l’ensemble de la théorie.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>
