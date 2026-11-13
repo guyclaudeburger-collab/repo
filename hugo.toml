@@ -1,10 +1,10 @@
 title = 'Minibiographie'
 disableKinds = ['taxonomy']
-baseURL = '/'
+baseURL = 'https://localhost'
 disableAliases = true
 defaultContentLanguage = 'fr'
 defaultContentLanguageInSubdir = false
-disableDefaultSiteRedirect = true
+disableDefaultSiteRedirect = false
 ignoreFiles = ['\.dj$']
 
 [security]
@@ -123,6 +123,12 @@ path = "/*/glossaire/*"
 
 [[cascade]]
   [cascade.sites.complements]
-    languages = ['de']
+    languages = ['fr']
   [cascade.target.sites.matrix]
     languages = ['en']
+
+[[cascade]]
+  [cascade.sites.complements]
+    languages = ['en']
+  [cascade.target.sites.matrix]
+    languages = ['de']
