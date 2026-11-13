@@ -2,4 +2,16 @@
 title: "An empirical yet verifiable basis"
 ---
 
-It may seem strange to consider a series of [paranormal phenomena](Métapsychique) as a valid empirical basis for any theory whatsoever. Yet the discovery of the fundamental relationship between Eros and development of psychic abilities brings a double factual basis for the psychoanalytic edifice, with all the consequences this can have on the entire theory.
+[Homepage](/)
+
+[pourquoi-parler, in all languages](pourquoi-parler)
+
+[Sexualité humaine, only in german](Sexualité_humaine)
+
+[alliesthesie-et-paranoia, available in FR + DE, not english](alliesthesie-et-paranoia) . On page Sexualité_humaine, leads to... itself.
+
+[ego-cancer-moi, under instincto/, available in english and french](ego-cancer-moi)
+leads to a ghost de/instincto/ego-cancer-moi page, with no content
+
+[first section page instincto/, available in FR + EN not DE](instincto)
+leads to a ghost de/instincto page, with no content

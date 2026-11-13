@@ -2,4 +2,16 @@
 title: "Eine überprüfbare doch empirische Grundlage"
 ---
 
-Das Herangehen Reichs, bekannt durch seine Aussagen zum [Orgon](pourquoi-parler) (gemäß ihm eine zugleich biologische, orgastische und spirituelle Energie), erweist sich auch als revisionsbedürftig. Reich scheint nicht gesehen zu haben, dass dieser Energie, von der er wollte, dass sie Wolken mit Hilfe einer Orgonkanone auflöst oder sie akkumulieren lässt, damit es regnet, was nicht funktioniert, am Ursprung übersinnlicher Fähigkeiten steht. Die Gesamtheit seiner Thesen muss in diesem Sinn überdacht werden, besonders die Funktion des Orgasmus, der nicht auf einen banalen Prozess von Spannung und Entspannung reduziert werden .
+[Homepage](/)
+
+[pourquoi-parler, in all languages](pourquoi-parler)
+
+[Sexualité humaine, only in german](Sexualité_humaine)
+
+[alliesthesie-et-paranoia, available in FR + DE, not english](alliesthesie-et-paranoia) . On page Sexualité_humaine, leads to... itself.
+
+[ego-cancer-moi, under instincto/, available in english and french](ego-cancer-moi)
+leads to a ghost de/instincto/ego-cancer-moi page, with no content
+
+[first section page instincto/, available in FR + EN not DE](instincto)
+leads to a ghost de/instincto page, with no content

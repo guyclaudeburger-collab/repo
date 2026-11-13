@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Locale }}" class="{{ .FirstSection.Slug}}"><head>
 {{- block "head" . -}}
+{{ $smallIcon := (resources.Get (default .Site.Params.Logo $.FirstSection.Params.Logo)).Process "fit 36x36 png" }}
+{{ $bigIcon := (resources.Get (default .Site.Params.Logo $.FirstSection.Params.Logo)).Process "fit 100x100 png" }}
+<link rel="icon" href="{{ $smallIcon.RelPermalink }}">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>{{ .FirstSection.LinkTitle }} - {{ .LinkTitle | .RenderString | plainify }}</title>
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />

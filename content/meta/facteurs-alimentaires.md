@@ -2,6 +2,16 @@
 title: Le facteur alimentaire
 ---
 
-Il  n’y a pas longtemps, l’influence de l’alimentation sur le corps était systématiquement niée, pourvu que le nombre minimal de calories soit respecté. On sait aujourd’hui qu’elle joue un rôle majeur dans de nombreuses maladies. Ce qu’on sait moins, c’est quelle est son influence sur le fonctionnement psychique.
+[Homepage](/)
 
-­­
+[pourquoi-parler, in all languages](pourquoi-parler)
+
+[Sexualité humaine, only in german](Sexualité_humaine)
+
+[alliesthesie-et-paranoia, available in FR + DE, not english](alliesthesie-et-paranoia) . On page Sexualité_humaine, leads to... itself.
+
+[ego-cancer-moi, under instincto/, available in english and french](ego-cancer-moi)
+leads to a ghost de/instincto/ego-cancer-moi page, with no content
+
+[first section page instincto/, available in FR + EN not DE](instincto)
+leads to a ghost de/instincto page, with no content

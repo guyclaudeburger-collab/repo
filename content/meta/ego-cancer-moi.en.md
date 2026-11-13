@@ -2,4 +2,16 @@
 title: Ego, cancer of the self
 ---
 
-To delve deeper into this brief demonstration, you can visit the page "[Alliesthesia and Paranoia](alliesthesie-et-paranoia)" on the website "[Instinctothérapie](instincto)".
+[Homepage](/)
+
+[pourquoi-parler, in all languages](pourquoi-parler)
+
+[Sexualité humaine, only in german](Sexualité_humaine)
+
+[alliesthesie-et-paranoia, available in FR + DE, not english](alliesthesie-et-paranoia) . On page Sexualité_humaine, leads to... itself.
+
+[ego-cancer-moi, under instincto/, available in english and french](ego-cancer-moi)
+leads to a ghost de/instincto/ego-cancer-moi page, with no content
+
+[first section page instincto/, available in FR + EN not DE](instincto)
+leads to a ghost de/instincto page, with no content

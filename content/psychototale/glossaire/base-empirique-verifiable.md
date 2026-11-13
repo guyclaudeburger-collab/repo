@@ -2,4 +2,16 @@
 title: "Une base empirique vérifiable"
 ---
 
-Il peut paraître étrange de considérer une série de [phénomènes paranormaux](Métapsychique) comme une base empirique valable, pour quelque théorie que ce soit. Pourtant, la découverte du rapport fondamental entre Eros et développement des facultés extrasensorielles apporte un double fondement factuel à l’édifice psychanalytique, avec toutes les conséquences que cela peut avoir sur l’ensemble de la théorie.
+[Homepage](/)
+
+[pourquoi-parler, in all languages](pourquoi-parler)
+
+[Sexualité humaine, only in german](Sexualité_humaine)
+
+[alliesthesie-et-paranoia, available in FR + DE, not english](alliesthesie-et-paranoia) . On page Sexualité_humaine, leads to... itself.
+
+[ego-cancer-moi, under instincto/, available in english and french](ego-cancer-moi)
+leads to a ghost de/instincto/ego-cancer-moi page, with no content
+
+[first section page instincto/, available in FR + EN not DE](instincto)
+leads to a ghost de/instincto page, with no content

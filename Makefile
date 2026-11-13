@@ -7,7 +7,7 @@ LUA_FILTER := ./editorial.lua
 .ONESHELL:
 .DELETE_ON_ERROR:
 .DEFAULT_GOAL := preview
-.PHONY: preview production archive deploy public
+.PHONY: preview production archive deploy
 
 notify = notify-send -e -u $(1) "$(NAME): $(2)"
 
@@ -44,7 +44,7 @@ public: data/bibliography.yaml $(SOURCES) $(DJ_HTML)
 
 preview: data/bibliography.yaml $(SOURCES)
 	if lsof -a -iTCP:1313 -c hugo >/dev/null; then
-		open http://localhost:1313
+		open http://localhost:1343
 	else
 		hugo server -M -D --minify --navigateToChanged -O || $(call notify,critical,Hugo FAILED)
 	fi

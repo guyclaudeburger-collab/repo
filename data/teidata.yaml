@@ -1,0 +1,80 @@
+relatorLabels:
+  abr: Abridger
+  adp: Adapter
+  anl: Analyst
+  ann: Annotator
+  aqt: Author in quotations or text abstracts
+  aud: Author of dialog
+  aut: Author
+  bkd: Book designer
+  blw: Blurb writer
+  clb: Collaborator
+  cmm: Commentator
+  com: Compiler
+  cor: Collection registrar
+  cov: Cover designer
+  cre: Creator
+  crp: Correspondent
+  crr: Corrector
+  csl: Consultant
+  csp: Consultant to a project
+  ctb: Contributor
+  cwt: Commentator for written text
+  dis: Dissertant
+  dsr: Designer
+  dtc: Data contributor
+  dtm: Data manager
+  dub: Dubious author
+  edc: Editor of compilation
+  edd: Editorial director
+  edt: Editor
+  exp: Expert
+  ill: Illustrator
+  mrk: Markup editor
+  pbl: Publisher
+  pfr: Proofreader
+  prt: Printer
+  rap: Rapporteur
+  res: Researcher
+  rev: Reviewer
+  rpt: Reporter
+  sad: Scientific advisor
+  tau: Television writer
+  tch: Teacher
+  trc: Transcriber
+  trl: Translator
+  wac: Writer of added commentary
+  wam: Writer of accompanying material
+  wap: Writer of approbation
+  wat: Writer of added text
+  waw: Writer of afterword
+  wfw: Writer of foreword
+  win: Writer of introduction
+  wpr: Writer of preface
+  wst: Writer of supplementary textual content
+persons:
+  m:
+    name: Mehdi Saada
+  Reich:
+    name: Wilhelm Reich
+    refs: {isni: "https://isni.org/isni/0000000121244395"}
+  Freud:
+    name: Sigmund Freud
+    refs: {isni: "https://isni.org/isni/0000000121272193"}
+  Jung:
+    name: Carl Gustav Jung
+    refs: {isni: "https://isni.org/isni/0000000426604224"}
+  Plato:
+    name: Plato
+    refs: {isni: "https://isni.org/isni/0000000121191408"}
+  Socrates:
+    name: Socrates
+    refs: {isni: "https://isni.org/isni/0000000121316913"}
+  g:
+    name: Guy-Claude Burger
+    refs: { databnf: "12018146" }
+  beltrando:
+    name: Silvère Beltrando
+  moebius:
+    name: Moebius
+    desc: "Pseudonyme de Jean Giraud (1938-2012)"

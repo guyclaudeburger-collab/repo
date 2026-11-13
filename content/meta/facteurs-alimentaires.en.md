@@ -2,4 +2,16 @@
 Title: The Dietary Factor
 ---
 
-Not long ago, the influence of food on the body was systematically denied, provided that a minimum number of calories was consumed. Today, we know that it plays a major role in many diseases. What is less well known is its influence on mental functioning.
+[Homepage](/)
+
+[pourquoi-parler, in all languages](pourquoi-parler)
+
+[Sexualité humaine, only in german](Sexualité_humaine)
+
+[alliesthesie-et-paranoia, available in FR + DE, not english](alliesthesie-et-paranoia) . On page Sexualité_humaine, leads to... itself.
+
+[ego-cancer-moi, under instincto/, available in english and french](ego-cancer-moi)
+leads to a ghost de/instincto/ego-cancer-moi page, with no content
+
+[first section page instincto/, available in FR + EN not DE](instincto)
+leads to a ghost de/instincto page, with no content

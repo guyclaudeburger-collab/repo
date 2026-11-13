@@ -5,5 +5,16 @@ Logo: "strawberry.jpg"
 slug: meta
 ---
 
-Tout est pour le mieux dans le meilleur des mondes possibles"...
-La célèbre formule de Candide s'applique-t-elle lorsqu'il s'agit d'amour et de sexualité ? Si tel est votre avis, ne perdez pas votre temps sur ce site et vivez tranquillement votre bonheur.
+[Homepage](/)
+
+[pourquoi-parler, in all languages](pourquoi-parler)
+
+[Sexualité humaine, only in german](Sexualité_humaine)
+
+[alliesthesie-et-paranoia, available in FR + DE, not english](alliesthesie-et-paranoia) . On page Sexualité_humaine, leads to... itself.
+
+[ego-cancer-moi, under instincto/, available in english and french](ego-cancer-moi)
+leads to a ghost de/instincto/ego-cancer-moi page, with no content
+
+[first section page instincto/, available in FR + EN not DE](instincto)
+leads to a ghost de/instincto page, with no content

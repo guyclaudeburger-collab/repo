@@ -2,6 +2,16 @@
 title: Sexualité humaine
 ---
 
-Du point de vue de l’écologie, c’est le rapport de la sexualité à l’environnement sous toutes ses formes. Il faut prendre en compte la qualité de l’entourage, les affinités ressenties pour tel ou tel individu (ou affinités <q>[énergétiques](pourquoi-parler)</q>), le comportement du partenaire, l’image de la sexualité renvoyée par la culture et la morale, l’acceptation ou le refus de l’existence d’une dimension transcendante, mais aussi les [données de l’alimentation](instincto) et leurs répercussions tant physiologiques que psychologiques.
+[Homepage](/)
 
-[ego](ego-cancer-moi)
+[pourquoi-parler, in all languages](pourquoi-parler)
+
+[Sexualité humaine, only in german](Sexualité_humaine)
+
+[alliesthesie-et-paranoia, available in FR + DE, not english](alliesthesie-et-paranoia) . On page Sexualité_humaine, leads to... itself.
+
+[ego-cancer-moi, under instincto/, available in english and french](ego-cancer-moi)
+leads to a ghost de/instincto/ego-cancer-moi page, with no content
+
+[first section page instincto/, available in FR + EN not DE](instincto)
+leads to a ghost de/instincto page, with no content

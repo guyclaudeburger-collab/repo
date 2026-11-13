@@ -1,0 +1,4 @@
+/en/archives/*.tei
+    Content-Type: application/xml; charset=utf-8
+/archives/*.tei
+    Content-Type: application/xml; charset=utf-8

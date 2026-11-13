@@ -4,6 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="{{ relURL "default.css" }}">
+{{ $smallIcon := (resources.Get (default .Site.Params.Logo $.FirstSection.Params.Logo)).Process "fit 36x36 png" }}
+{{ $bigIcon := (resources.Get (default .Site.Params.Logo $.FirstSection.Params.Logo)).Process "fit 100x100 png" }}
+<link rel="icon" href="{{ $smallIcon.RelPermalink }}">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>{{ .Title }} ┆ {{ site.Title }}</title>
 <meta property="og:site_name" content="{{ .Site.Title }}">
@@ -19,7 +22,7 @@
 {{ end }}
 </head>
 <body data-pagefind-body="data-pagefind-body">
-<nav>{{ with .FirstSection }}<a href="{{- .RelPermalink -}}" {{if eq . $currentpage}}aria-current="page"{{end}} class=home>{{- .Title  -}}</a>{{- end -}}
+<nav>{{ with .FirstSection }}<a href="{{- .RelPermalink -}}" {{if eq . $currentpage}}aria-current="page"{{end}} class=home><img src="{{ $bigIcon.RelPermalink }}"/>{{- .Title  -}}</a>{{- end -}}
 {{- $currentpage := .Page -}}
 {{- if .Page.Params.Toc -}}
 <details role=directory name="header-menu"><summary>☰</summary>
